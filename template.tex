@@ -1,0 +1,315 @@
+\input{top-apj}
+
+% Headers for odd and even pages, respectively:
+\shorttitle{ApJ Template}
+% If more than two authors, use {\em et al.}
+\shortauthors{Cubillos {\em et al.}}
+
+
+\begin{document}
+
+\title{Latex Template for ApJ Papers}
+
+\author{Patricio~E.~Cubillos\altaffilmark{1,2},
+Joseph~Harrington\altaffilmark{1},
+and
+Third~Author\altaffilmark{1}
+}
+
+\affil{\sp{1} Planetary Sciences Group, Department of
+              Physics, University of Central Florida, Orlando, FL 32816-2385\\
+       \sp{2} Space Research Institute, Austrian Academy of Sciences,
+              Schmiedlstrasse 6, A-8042, Graz, Austria}
+
+\email{author@email.org}
+
+\begin{abstract}
+  This template shows some basic features of a LaTeX template for a
+  manuscript in The Astrophysical Journal (ApJ) style.  You can find
+  the source code for this template in
+  \href{https://github.com/pcubillos/ApJtemplate}
+  {github.com/pcubillos/ApJtemplate}.
+  See also the `how to write
+  Lorem Ipsum is simply dummy text of the printing and typesetting
+  industry. Lorem Ipsum has been the industry's standard dummy text ever
+  since the 1500s, when an unknown printer took a galley of type and
+  scrambled it to make a type specimen book. It has survived not only
+  five centuries, but also the leap into electronic typesetting,
+  remaining essentially unchanged. It was popularised in the 1960s with
+  the release of Letraset sheets containing Lorem Ipsum passages, and
+  more recently with desktop publishing software like Aldus PageMaker
+  including versions of Lorem Ipsum.
+\end{abstract}
+
+% http://journals.aas.org/authors/keywords2013.html
+\keywords{methods: statistical ---
+          planetary systems   ---
+          techniques: photometric}
+
+
+\section{INTRODUCTION}
+\label{introduction}
+
+This is an introductory section.  Start with some broad background and,
+as you advance, give more specific details concerning your research.
+Usually, the last paragraph of the introduction details the content in
+the rest of the sections.
+
+In Section \ref{sec:observations}, we describe observations, show some
+examples of how to cite other papers.  In Section
+\ref{sec:dataanalysis}, we describe our data analysis, show a Figure
+example and give a quick grammar lesson.  In Section
+\ref{sec:science}, we present a physical interpretation of our data
+and show a Table example.  Finally, in Section \ref{sec:conclusions}
+we conclude.
+
+\section{OBSERVATIONS}
+\label{sec:observations}
+
+We observed exoplanets, many of them.  Sometimes we deal with theory,
+but most of the time we reduce data.
+
+This text shows how to cite other people's papers.
+\citet{HarringtonEtal2006sciuandbphas} is a citation to a paper.
+Citations can also be in parenthesis
+\citep[e.g.,][]{HarringtonEtal2007natHD149026b}.  Multiple papers can
+be cited in one go \citep{StevensonEtal2010natGJ436b,
+  StevensonEtal2012apjHD149026b, StevensonEtal2012apjGJ436c,
+  BlecicEtal2013apjWASP14b, BlecicEtal2014apjWASP43b,
+  CubillosEtal2013apjWASP8b, CubillosEtal2014apjTrES1,
+  CampoEtal2011apjWASP12b, NymeyerEtal2011apjWASP18b}.
+
+The references information is kept in bibtex format.  Bibtex entries
+are generally obtained from
+\href{http://adsabs.harvard.edu/abstract_service.html}{ADS}, and
+should be stored in a bibfile (see `bibfile-template.bib').
+
+
+\section{DATA ANALYSIS}
+\label{sec:dataanalysis}
+
+\subsection{Compiling LaTeX}
+\label{sec:compile}
+
+To properly compile a latex document that uses bibtex you need to run
+these set of commands: \newline
+
+\indent \texttt{latex $\triangleright$ bibtex $\triangleright$ latex
+  $\triangleright$ latex $\triangleright$ latex} \newline
+
+The multiple latex calls are necessary to let LaTeX properly set the
+cross references.  However, if you include these functions
+into your bash file (\sim/.bashrc for Unix, or \sim/.bash\_profile for OSX): \\
+
+\footnotesize \noindent
+latexcl()\{ rm -f \$*.bbl \$*.blg \$*.dvi \$*.log \$*.aux \$*.ps \$*.pdf; \} \\
+lblll()\{ latex \$* ; bibtex \$* ; latex \$* ; latex \$* ; latex \$*; \} \\
+pspdfembed()\{ ps2pdf -dMaxSubsetPct=100 -dCompatibilityLevel=1.3 -dSubsetFonts=true -dEmbedAllFonts=true \$*; \} \\
+latpdf()\{ dvips -R0 -P pdf -t letter -f \$* | pspdfembed - - > \$*.pdf \& \} \\
+latbibdo()\{ latexcl \$*; lblll \$* ; latpdf \$* \& \} \\
+latexdo()\{ latexcl \$* ; latex \$* ; latex \$* ; latex \$* ; latpdf \$* \& \} \\
+\normalsize
+
+% Here they are clean, so you can include them in your bash:
+% latexcl () { rm -f $*.bbl $*.blg $*.dvi $*.log $*.aux $*.ps $*.pdf; }
+% lblll () { latex $*; bibtex $*; latex $*; latex $*; latex $*; }
+% pspdfembed () { ps2pdf -dMaxSubsetPct=100 -dCompatibilityLevel=1.3 -dSubsetFonts=true -dEmbedAllFonts=true $*; }
+% latpdf () { dvips -R0 -P pdf -t letter -f $* | pspdfembed - - > $*.pdf & }
+% latbibdo () { latexcl $*; lblll $*; latpdf $* & }
+% latexdo () { latexcl $*; latex $*; latex $*; latex $*; latpdf $* & }
+
+You can compile the document in one single command, for example: \\
+{\tt latbibdo templateApJ} \\
+
+The {\tt top-apj.tex} file contains all the latex headers and
+user-defined commands.  See comments in that file for what's going on
+there.
+
+\subsection{Figures}
+\label{sec:figures}
+
+Figure \ref{fig:writing} depicts the paper writing process.  It is
+very useful to keep a record of the source plotting code into the .tex
+source file (see comment in the Fig caption), so you can
+easily find how you made the plot and make updates.  Because you will
+have to re-make the plot. Yes, many times.
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\linewidth, clip]{figs/paperwriting.ps}
+\caption{The Paper Publication Process.  The following clause seems to be
+  universal: ``The closer you are to finish a paper, the longer it
+  takes to make any significant improvement.''  On other news,
+  although this figure in particular has a title, in papers, figure titles
+  appear as the first sentence fragment of the
+  caption, as seen in this caption, rather than at the top of the
+  graphic.}
+\label{fig:writing}
+% SOURCE: /home/patricio/ast/esp01/code/lib/python/xkcd/paperwritting.py
+\end{figure}
+
+
+\subsection{Grammar}
+\label{sec:grammar}
+
+And now some grammar: `which' introduces a clause that adds a new fact,
+and must be set between commas.  For example: ``There was an earthquake
+in Chile, which isn't really any news.''  `That' introduces a clause
+that explains or limits, and has no surrounding commas.  For example:
+``Class O-stars that lie in the constellation of Orion have small proper
+motion.''
+
+Use the ``Oxford'' comma in lists.  For example, ``I love my parents, Lady Gaga, and Humpty Dumpty.'', NOT ``I love my parents, Lady Gaga and Humpty Dumpty.''
+
+Use a hyphen to connect two adjectives acting as a single adjective on
+a noun.  You have a bad-pixel map, not a bad pixel map.  The former is
+a map of bad pixels.  The latter could be a pixel map, but a bad one.
+The hyphen breaks the ambiguity.  However, do {\em not}\/ use a hyphen
+between an adverb and an adjective, as the adverb could never modify
+the noun and there is no ambiguity: ``We applied a poorly made mask,''
+not, ``we applied a poorly-made mask.''  Note that this is a change in
+practice from before 2000 or so.  Also, do not hyphenate inside names
+or between a number and its units: ``our 3 hour Markov-Chain Monte
+Carlo run,'' not ``our 3-hour Markov-Chain Monte-Carlo run.''
+
+
+\section{SCIENCE}
+\label{sec:science}
+
+This section gives a scientific interpretation of the analyzed data.
+
+The macross provide the unslanted mu, `{\micro}' to be used for units of
+values, for example: {\micron} or {\microbar}.
+Table \ref{table:parameters} is a table.  Tables are well behaved;
+most of the time they appear right (or close to) where you put them.
+Figures are not.  The can show up anywhere in the pdf.   Be patient.
+
+\begin{table}[ht]
+\centering
+\caption{\label{table:parameters} Light curve parameters}
+\begin{tabular}{lc}
+\hline
+\hline
+Parameter                           & Value           \\
+\hline
+Eclipse depth (counts)              & 98.1            \\
+Eclipse duration (phase)            & 0.1119          \\
+Eclipse mid point (phase)           & 0.5015          \\
+Eclipse ingress/egress time (phase) & 0.013           \\
+Ramp slope (counts/phase)           & 0.006           \\
+System flux (counts)                & 25815           \\
+\hline
+% SOURCE: /home/patricio/ast/esp01/analyses/ligtcurve/attempt_547/results.txt
+\end{tabular}
+\end{table}
+
+
+\section{CONCLUSIONS}
+\label{sec:conclusions}
+
+These are our conclusions.  Although this example has used a colloquial
+dialogue, real papers should use a formal writting style.  After the
+conclusions we include some acknowledgments.
+
+\comment{
+% deluxetable works for aastex6, not much for emulateapj:
+\begin{deluxetable*}{lr@{}lr@{}lrrccrrrccrr}
+%\tabletypesize{\footnotesize}
+% \tablecolumns{14}
+\tablewidth{\linewidth}
+\tablecaption{Planets \label{table:allplanets}}
+
+\tablehead{\colhead{Name}                           &
+            \multicolumn{2}{c}{Mass}                &
+            \multicolumn{2}{c}{Radius}              &
+            \colhead{$T_{\rm eq}$}                   &
+            \colhead{$\Omega$}                      &
+            \colhead{$a$}                           &
+            \colhead{$M_{s}$}                       &
+            \colhead{A}                             &
+            \colhead{$\Omega_{\rm rot}$}             &
+            \colhead{Flux}                          &
+            \colhead{$L_{\rm h}$}                    &
+            \colhead{$L_{\rm e}$}                    &
+            \colhead{$L_{\rm h}$/$L_{\rm e}$}         &
+           \colhead{Ref.\,\tablenotemark{a}}  \\
+           \colhead{}                              &
+           \multicolumn{2}{c}{$M$}                 &
+           \multicolumn{2}{c}{$R$}                 &
+           \colhead{}                              &
+           \colhead{}                              &
+           \colhead{}                              &
+           \colhead{$M$}                           &
+           \colhead{}                              &
+           \colhead{$\Omega$}                      &
+           \colhead{erg\,s}                        &
+           \colhead{s}                             &
+           \colhead{s}                             &
+            \colhead{}                              }
+\startdata
+55 Cnc e      & $ 8.38$ & $\pm 0.39$               & $ 2.08$ & $\pm 0.16$             &         1957 &       15.6 & $0.015$ & $0.91$ & $  10.2$ & $1.4$ & $142697.6$ & $3\times10^{30}$ & $3\times10^{30}$ & $\cdots$ & De11 \\
+55 Cnc e      & $ 8.38$ & $\pm 0.39$               & $ 2.08$ & $\pm 0.16$             &         1957 &       15.6 & $0.015$ & $0.91$ & $  10.2$ & $1.4$ & $142697.6$ & $\cdots$ & $\cdots$ & $\cdots$ & De11 \\
+55 Cnc e      & $ 8.38$ & $\pm 0.39$               & $ 2.08$ & $\pm 0.16$             &         1957 &       15.6 & $0.015$ & $0.91$ & $  10.2$ & $1.4$ & $142697.6$ & $\cdots$ & $\cdots$ & $\cdots$ & De11 \\
+55 Cnc e      & $ 8.38$ & $\pm 0.39$               & $ 2.08$ & $\pm 0.16$             &         1957 &       15.6 & $0.015$ & $0.91$ & $  10.2$ & $1.4$ & $142697.6$ & $\cdots$ & $\cdots$ & $\cdots$ & De11 \\
+\enddata
+
+\tablenotetext{a}{
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+}
+\end{deluxetable*}
+}
+
+Lorem Ipsum is simply dummy text of the printing and typesetting
+industry. Lorem Ipsum has been the industry's standard dummy text ever
+since the 1500s, when an unknown printer took a galley of type and
+scrambled it to make a type specimen book. It has survived not only
+five centuries, but also the leap into electronic typesetting,
+remaining essentially unchanged. It was popularised in the 1960s with
+the release of Letraset sheets containing Lorem Ipsum passages, and
+more recently with desktop publishing software like Aldus PageMaker
+including versions of Lorem Ipsum.
+
+\acknowledgments
+
+We thank A.\ Friend, B.\ Foe, and an anonymous referee for helpful
+discussions and improvements to the paper.  C.\ Scientist provided the
+data in table 1.
+We thank contributors to SciPy, Matplotlib, and the Python Programming
+Language; the free and open-source community; the NASA Astrophysics
+Data System; and the JPL Solar System Dynamics group for software and
+services.
+Part of this work is based on observations made with the
+{\em Spitzer Space Telescope}, which is operated by the Jet Propulsion
+Laboratory, California Institute of Technology under a contract with
+NASA.
+Support for this work was provided by NASA through an award
+issued by JPL/Caltech and through the NASA Science Mission
+Directorate's Astrophysics Data Analysis Program, grant
+XXY00ZZZ1110.
+Jill held a NASA Earth and Space Science Fellowship.  Tom was a
+Fulbright Scholar.  Get the right wording from each entity you must
+acknowledge.  This is very important!!!
+
+\bibliography{template}
+
+\begin{appendices}
+
+\section{BAYESIAN CREDIBLE REGION}
+\label{sec:CredRegion}
+
+In the Bayesian context, given the posterior probability density,
+$p(\theta|{\bf D})$, of a parameter, $\theta$, given the dataset,
+${\bf D}$, the highest posterior density region (or credible
+region), $R$, is defined by
+\begin{equation}
+C = \int\sb{R} {\rm d}\theta\;p(\theta|{\bf D})
+\label{eq:CredRegion}
+\end{equation}
+where C is the probability contained in the credible region.  The
+region $R$ is selected such that the posterior probability of any
+point inside $R$ is larger than that of any point outside.  We like
+Eq.\ (\ref{eq:CredRegion}).
+
+\end{appendices}
+
+\end{document}
