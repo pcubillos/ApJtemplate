@@ -1,4 +1,4 @@
-% latbibdo  templateApJ
+% latbibdo  template
 
 \newcommand\apjcls{1}
 \newcommand\aastexcls{2}
@@ -6,19 +6,18 @@
 
 % Select ony one of the following \papercls and cls file:
 
+% AASTEX6 cls:
+\newcommand\papercls{\aastexcls}
+\documentclass[tighten, times, preprint2]{aastex6}  % ApJ look-alike
+%\documentclass[tighten, times, trackchanges, preprint2]{aastex6}
+%\documentclass[tighten, times, manuscript]{aastex6}  % Onecolumn, doublespaced
+
 % Emulate ApJ cls:
 %\newcommand\papercls{\apjcls}
 %\documentclass[iop]{emulateapj}
 
-% AASTEX6 cls:
-\newcommand\papercls{\aastexcls}
-\documentclass[tighten, times, preprint2]{aastex6}  % ApJ look-alike
-%\documentclass[tighten, times, manuscript]{aastex6} % Onecolumn, doublespaced
-
 % Other cls:
 %\newcommand\papercls{\othercls}
-%\documentclass[letterpaper,12pt]{article}
-%\documentclass[12pt,preprint]{aastex}
 %\documentclass[letterpaper,12pt]{article}
 
 % These are latex packages that enable various capability.
@@ -37,8 +36,8 @@
 %\usepackage{lscape}
 
 % To have nice and size-adjustable \texttt fonts:
-\usepackage[T1]{fontenc}
-\usepackage[scaled=.75]{beramono}
+%\usepackage[T1]{fontenc}
+%\usepackage[scaled=.75]{beramono}
 
 % This one defines a few more journals (DPS and AAS abstracts) for bibtex:
 \if\papercls \apjcls
