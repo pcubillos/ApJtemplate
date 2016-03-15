@@ -29,7 +29,6 @@ Third~Author\altaffilmark{1}
   the source code for this template in
   \href{https://github.com/pcubillos/ApJtemplate}
   {github.com/pcubillos/ApJtemplate}.
-  See also the `how to write
   Lorem Ipsum is simply dummy text of the printing and typesetting
   industry. Lorem Ipsum has been the industry's standard dummy text ever
   since the 1500s, when an unknown printer took a galley of type and
@@ -57,8 +56,8 @@ the rest of the sections.
 
 In Section \ref{sec:observations}, we describe observations, show some
 examples of how to cite other papers.  In Section
-\ref{sec:dataanalysis}, we describe our data analysis, show a Figure
-example and give a quick grammar lesson.  In Section
+\ref{sec:compile}, we show how to compile this document, show a Figure
+example and give some quick grammar lessons.  In Section
 \ref{sec:science}, we present a physical interpretation of our data
 and show a Table example.  Finally, in Section \ref{sec:conclusions}
 we conclude.
@@ -85,21 +84,26 @@ are generally obtained from
 should be stored in a bibfile (see `bibfile-template.bib').
 
 
-\section{DATA ANALYSIS}
-\label{sec:dataanalysis}
-
-\subsection{Compiling LaTeX}
+\section{COMPILING LATEX}
 \label{sec:compile}
 
-To properly compile a latex document that uses bibtex you need to run
-these set of commands: \newline
-
-\indent \texttt{latex $\triangleright$ bibtex $\triangleright$ latex
-  $\triangleright$ latex $\triangleright$ latex} \newline
+To properly compile a latex document that uses bibtex (this one, for
+example) you need to run these set of commands from the prompt:
+\newline
+\indent \texttt{latex template} \newline
+\indent \texttt{bibtex template} \newline
+\indent \texttt{latex template} \newline
+\indent \texttt{latex template} \newline
+\indent \texttt{latex template} \newline
 
 The multiple latex calls are necessary to let LaTeX properly set the
-cross references.  However, if you include these functions
-into your bash file (\sim/.bashrc for Unix, or \sim/.bash\_profile for OSX): \\
+cross references.  However, you can compile the document with this single command: \newline
+\indent \texttt{latbibdo template} \newline
+
+If you include the following functions into your bash file
+(\sim/.bashrc for Unix, or \sim/.bash\_profile for OSX)%
+\footnote{Take a look at the .tex source code to copy-paste these
+  commands.}: \newline
 
 \footnotesize \noindent
 latexcl()\{ rm -f \$*.bbl \$*.blg \$*.dvi \$*.log \$*.aux \$*.ps \$*.pdf; \} \\
@@ -110,7 +114,7 @@ latbibdo()\{ latexcl \$*; lblll \$* ; latpdf \$* \& \} \\
 latexdo()\{ latexcl \$* ; latex \$* ; latex \$* ; latex \$* ; latpdf \$* \& \} \\
 \normalsize
 
-% Here they are clean, so you can include them in your bash:
+%% Here they are clean, so you can include them in your bash:
 % latexcl () { rm -f $*.bbl $*.blg $*.dvi $*.log $*.aux $*.ps $*.pdf; }
 % lblll () { latex $*; bibtex $*; latex $*; latex $*; latex $*; }
 % pspdfembed () { ps2pdf -dMaxSubsetPct=100 -dCompatibilityLevel=1.3 -dSubsetFonts=true -dEmbedAllFonts=true $*; }
@@ -118,12 +122,44 @@ latexdo()\{ latexcl \$* ; latex \$* ; latex \$* ; latex \$* ; latpdf \$* \& \} \
 % latbibdo () { latexcl $*; lblll $*; latpdf $* & }
 % latexdo () { latexcl $*; latex $*; latex $*; latex $*; latpdf $* & }
 
-You can compile the document in one single command, for example: \\
-{\tt latbibdo templateApJ} \\
+Alternatively, if you want to use pdflatex, put this set of functions
+in your bash:
 
-The {\tt top-apj.tex} file contains all the latex headers and
-user-defined commands.  See comments in that file for what's going on
-there.
+\footnotesize
+latex () \{ pdflatex "\$@" ; \}\\
+latexcl () \{ rm -f "\$@".bbl "\$@".blg "\$@"Notes.bib "\$@".out "\$@".dvi "\$@".log "\$@".aux "\$@".lof "\$@".lot "\$@".toc "\$@".ps "\$@".pdf; \} \\
+lblll () \{ latex "\$@" ; bibtex "\$@" ; latex "\$@" ; latex "\$@"; latex "\$@"; \}\\
+latbibdo () \{ latexcl "\$@"; lblll "\$@" ; \}\\
+latexdo () \{ latexcl "\$@" ; latex "\$@" ; latex "\$@" ; latex "\$@" ; \}\\
+\normalsize
+% Here they are clean, so you can include them in your .bashrc:
+%latbibdo () { latexcl "$@"; lblll "$@" ; }
+%latex () { pdflatex "$@" ; }
+%latexcl () { rm -f "$@".bbl "$@".blg "$@"Notes.bib "$@".out "$@".dvi "$@".log "$@".aux "$@".lof "$@".lot "$@".toc "$@".ps "$@".pdf; }
+%latexdo () { latexcl "$@" ; latex "$@" ; latex "$@" ; latex "$@" ; }
+%lblll () { latex "$@" ; bibtex "$@" ; latex "$@" ; latex "$@" ; latex "$@"; }
+
+For the plain latex commands (the first option) you can include .ps or .eps figures (see Section \ref{sec:figures}). For pdflatex (the second option) you can include .pdf figures.
+
+To delete all non-source files, run: \newline
+\indent \texttt{latexcl template} \newline
+
+To get a PDF file from a .tex document from a clean run, do: \newline
+\indent \texttt{latexdo template} \newline
+
+latexdo will delete your non-source files (.pdf, .aux, etc.) and run latex
+several times to get all the page and section references right.
+
+
+\subsection{Top File}
+
+The \texttt{top-apj.tex} file contains the latex header.  In there you
+can choose the document class between \texttt{aastex6.cls} (default),
+\texttt{emulateapj.cls}, or others (e.g., \texttt{article.cls}).  You
+can also add additional packages, set the bibliography style, and add
+your favorite commands.  Other than that, you do not need to mess much
+with the top file.
+
 
 \subsection{Figures}
 \label{sec:figures}
@@ -177,9 +213,13 @@ Carlo run,'' not ``our 3-hour Markov-Chain Monte-Carlo run.''
 \label{sec:science}
 
 This section gives a scientific interpretation of the analyzed data.
+The \texttt{'\textbackslash micro'} macross provides the unslanted mu,
+`{\micro}' to be used for units of values, for example: {\micron} or
+{\microbar}.  Another nice feature are \texttt{'\$\textbackslash
+  ttt\{n\}\$'} for a 'ten-to-the-n' ($\ttt{n}$) and
+\texttt{'\$\textbackslash tttt\{n\}\$'} for 'times-ten-to-the-n'
+($\tttt{n}$).
 
-The macross provide the unslanted mu, `{\micro}' to be used for units of
-values, for example: {\micron} or {\microbar}.
 Table \ref{table:parameters} is a table.  Tables are well behaved;
 most of the time they appear right (or close to) where you put them.
 Figures are not.  The can show up anywhere in the pdf.   Be patient.
@@ -204,13 +244,12 @@ System flux (counts)                & 25815           \\
 \end{table}
 
 
-\section{CONCLUSIONS}
-\label{sec:conclusions}
+Deluxe tables, like Table \ref{table:allplanets} are great. If they
+are too long, they automatically split and continue in the next
+page. Everything looks fine in Aastex6; however, in emulateapj the
+format seems to fail.
 
-These are our conclusions.  Although this example has used a colloquial
-dialogue, real papers should use a formal writting style.  After the
-conclusions we include some acknowledgments.
-
+\begin{table}[t]
 % deluxetable works for aastex6, not much for emulateapj:
 \begin{deluxetable*}{lr@{}lr@{}lrrccrrrccrr}
 \tabletypesize{\footnotesize}
@@ -218,32 +257,32 @@ conclusions we include some acknowledgments.
 \tablewidth{\linewidth}
 \tablecaption{Planets \label{table:allplanets}}
 
-\tablehead{\colhead{Name}                           &
-            \multicolumn{2}{c}{Mass}                &
-            \multicolumn{2}{c}{Radius}              &
-            \colhead{$T_{\rm eq}$}                   &
-            \colhead{$\Omega$}                      &
-            \colhead{$a$}                           &
-            \colhead{$M_{s}$}                       &
-            \colhead{A}                             &
-            \colhead{$\Omega_{\rm rot}$}             &
-            \colhead{Flux}                          &
-            \colhead{$L_{\rm h}$}                    &
-            \colhead{$L_{\rm e}$}                    &
-            \colhead{$L_{\rm h}$/$L_{\rm e}$}         &
-           \colhead{Ref.\,\tablenotemark{a}}  \\
-           \colhead{}                              &
-           \multicolumn{2}{c}{$M$}                 &
-           \multicolumn{2}{c}{$R$}                 &
-           \colhead{}                              &
-           \colhead{}                              &
-           \colhead{}                              &
-           \colhead{$M$}                           &
-           \colhead{}                              &
+\tablehead{\colhead{Name}                          &
+           \multicolumn{2}{c}{Mass}                &
+           \multicolumn{2}{c}{Radius}              &
+           \colhead{\Teq}                          &
            \colhead{$\Omega$}                      &
-           \colhead{erg\,s}                        &
-           \colhead{s}                             &
-           \colhead{s}                             &
+           \colhead{$a$}                           &
+           \colhead{$M$\sb{s}}                     &
+           \colhead{Age}                           &
+           \colhead{$\Omega\sb{\rm rot}$}          &
+           \colhead{Flux}                          &
+           \colhead{$L\sb{\rm h}$}                 &
+           \colhead{$L\sb{\rm e}$}                 &
+           \colhead{$L\sb{\rm h}$/$L\sb{\rm e}$}   &
+           \colhead{Ref.\,\tnm{a}}                 \\
+           \colhead{}                              &
+           \multicolumn{2}{c}{\mearth}             &
+           \multicolumn{2}{c}{\rearth}             &
+           \colhead{}                              &
+           \colhead{}                              &
+           \colhead{}                              &
+           \colhead{\msun}                         &
+           \colhead{}                              &
+           \colhead{$\Omega\sb{\odot}$}            &
+           \colhead{erg\,s$\sp{-1}$\,cm$\sp{-2}$}  &
+           \colhead{s$\sp{-1}$}                    &
+           \colhead{s$\sp{-1}$}                    &
             \colhead{}                              }
 \startdata
 55 Cnc e      & $ 8.38$ & $\pm 0.39$               & $ 2.08$ & $\pm 0.16$             &         1957 &       15.6 & $0.015$ & $0.91$ & $  10.2$ & $1.4$ & $142697.6$ & $3\times10^{30}$ & $3\times10^{30}$ & $\cdots$ & De11 \\
@@ -256,7 +295,14 @@ conclusions we include some acknowledgments.
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 }
 \end{deluxetable*}
+\end{table}
 
+\section{CONCLUSIONS}
+\label{sec:conclusions}
+
+These are our conclusions.  Although this example has used a colloquial
+dialogue, real papers should use a formal writting style.  After the
+conclusions we include some acknowledgments.
 
 Lorem Ipsum is simply dummy text of the printing and typesetting
 industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -267,6 +313,7 @@ remaining essentially unchanged. It was popularised in the 1960s with
 the release of Letraset sheets containing Lorem Ipsum passages, and
 more recently with desktop publishing software like Aldus PageMaker
 including versions of Lorem Ipsum.
+
 
 \acknowledgments
 

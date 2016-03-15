@@ -4,7 +4,7 @@
 \newcommand\aastexcls{2}
 \newcommand\othercls{3}
 
-% Select ony one of the following \papercls and cls file:
+% Select ony one pair of \papercls and class file:
 
 % AASTEX6 cls:
 \newcommand\papercls{\aastexcls}
@@ -20,8 +20,10 @@
 %\newcommand\papercls{\othercls}
 %\documentclass[letterpaper,12pt]{article}
 
+
+%% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 % These are latex packages that enable various capability.
-% Google to find out about each one, and look in the README.
+
 \if\papercls \apjcls
 \usepackage{apjfonts}
 \else\if\papercls \othercls
@@ -32,12 +34,7 @@
 \usepackage{amssymb, amsmath}
 \usepackage{appendix}
 \usepackage{etoolbox}
-%\usepackage{rotating}
-%\usepackage{lscape}
-
-% To have nice and size-adjustable \texttt fonts:
-%\usepackage[T1]{fontenc}
-%\usepackage[scaled=.75]{beramono}
+\usepackage[T1]{fontenc}
 
 % This one defines a few more journals (DPS and AAS abstracts) for bibtex:
 \if\papercls \apjcls
@@ -56,18 +53,7 @@
 % the journal you are writing for and that has hyperlinks for the
 % actual paper online.
 \bibliographystyle{apj_hyperref}
-%\bibliographystyle{hapj}
-%\bibliographystyle{apj}
-
-% \bibpunct sets the punctuation used in citations (year in parens or
-% brackets, etc.).  Emulateapj has an error (semicolon instead of
-% first comma in braces).  Once that's fixed, take out the first
-% \bibpunct line.
-\if\papercls \apjcls
-\bibpunct[, ]{(}{)}{,}{a}{}{,}
-\else
-\bibpunct[, ]{(}{)}{,}{a}{}{,}
-\fi
+%\bibliographystyle{aasjournal}
 
 
 % Setup hyperreferences style:
@@ -280,13 +266,6 @@ frenchlinks=true]{hyperref}
 \catcode`@=12
 \reservedcharson
 
-% \newcommand\jhauth[1]{{#1}}
-% \newcommand\jhstud[1]{{#1}}
-% 
-% \comment{ Must have ONLY ONE of these... trust these macros, they work
-% \newcommand\jhauth[1]{{\bfseries #1}}
-% \newcommand\jhstud[1]{{\em #1}}
-% }
 
 \if\papercls \apjcls
 \newcommand\widedeltab{deluxetable}
@@ -311,22 +290,38 @@ frenchlinks=true]{hyperref}
   \fi
 \fi
 
-% Convenience macross:
-% From Patricio Cubillos:
+
+%% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+%% Convenience macross:
 \newcommand\tnm[1]{\tablenotemark{#1}}
+%% Spitzer:
 \newcommand\SST{{\em Spitzer Space Telescope}}
 \newcommand\Spitzer{{\em Spitzer}}
+%% chi-squared:
 \newcommand\chisq{\ifmmode{\chi\sp{2}}\else\math{\chi\sp{2}}\fi}
 \newcommand\redchisq{\ifmmode{ \chi\sp{2}\sb{\rm red}}
                     \else\math{\chi\sp{2}\sb{\rm red}}\fi}
-\newcommand\Tb{$T$\sb{b}}
-\newcommand\Teq{$T$\sb{eq}}
-\newcommand\mjup{$M\sb{\rm Jup}$}
-\newcommand\rjup{$R\sb{\rm Jup}$}
-\newcommand\msun{$M\sb{\odot}$}
-\newcommand\rsun{$R\sb{\odot}$}
-\newcommand\mearth{$M\sb{\oplus}$}
-% From Joe Harrington:
+%% Equilibrium temperature:
+\newcommand\Teq{\ifmmode{T\sb{\rm eq}}\else$T$\sb{eq}\fi}
+%% Jupiter mass, radius:
+\newcommand\mjup{\ifmmode{M\sb{\rm Jup}}\else$M$\sb{Jup}\fi}
+\newcommand\rjup{\ifmmode{R\sb{\rm Jup}}\else$R$\sb{Jup}\fi}
+%% Solar mass, radius:
+\newcommand\msun{\ifmmode{M\sb{\odot}}\else$M\sb{\odot}$\fi}
+\newcommand\rsun{\ifmmode{R\sb{\odot}}\else$R\sb{\odot}$\fi}
+%% Earth mass, radius:
+\newcommand\mearth{\ifmmode{M\sb{\oplus}}\else$M\sb{\oplus}$\fi}
+\newcommand\rearth{\ifmmode{R\sb{\oplus}}\else$R\sb{\oplus}$\fi}
+%% Molecules:
+\newcommand\molhyd{H$\sb{2}$}
+\newcommand\methane{CH$\sb{4}$}
+\newcommand\water{H$\sb{2}$O}
+\newcommand\carbdiox{CO$\sb{2}$}
+\newcommand\carbmono{CO}
+%% Units:
+\newcommand\ms{m\;s$\sp{-1}$}
+\newcommand\cms{cm\;s$\sp{-1}$}
+
 \newcommand\degree{\degr}
 \newcommand\degrees{\degree}
 \newcommand\vs{\emph{vs.}}
