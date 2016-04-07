@@ -8,15 +8,16 @@ Latex template for The Astrophysical Journal (ApJ).
 
 ### The template:
 
-This template uses the most recent Aastex ([aastex6](http://journals.aas.org/authors/aastex.html)) and
+This template uses the most recent [aastex6](http://journals.aas.org/authors/aastex.html) and
 [emulateapj](http://hea-www.harvard.edu/~alexey/emulateapj) latex class files
 to produce pdf files as close to published ApJ documents as we could get.
+The template is also compatible with the article class (for proposals).
 
 The template.tex and template.pdf files should be self explanatory of the features provided by this template.
 
 ### Be Kind:
 
-Feel free to use, modify, share, and send feedback to us aout this template but, please,
+Feel free to use, modify, share, and send feedback to us about this template, but, please,
 be kind and aknowledge the effort of the authors. Thanks!
 
 ### License:

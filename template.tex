@@ -248,13 +248,17 @@ Deluxe tables, like Table \ref{table:allplanets} are great. If they
 are too long, they automatically split and continue in the next
 page. Everything looks fine in Aastex6; however, in emulateapj the
 format seems to fail.
+Deluxe table may be a bit tricky. If you surround it with the table
+environment, you can specify where to place them (e.g., top, bottom).
+However, if you do, long tables wont automatically break into separate
+pages.  So, there is a trade off.
 
-\begin{table}[t]
-% deluxetable works for aastex6, not much for emulateapj:
+%\begin{table}[t]
+% deluxetable works well for aastex6, not so much for emulateapj:
 \begin{deluxetable*}{lr@{}lr@{}lrrccrrrccrr}
 \tabletypesize{\footnotesize}
-% \tablecolumns{14}
-\tablewidth{\linewidth}
+%\tablecolumns{14}
+%\tablewidth{\textwidth}
 \tablecaption{Planets \label{table:allplanets}}
 
 \tablehead{\colhead{Name}                          &
@@ -290,12 +294,22 @@ format seems to fail.
 55 Cnc e      & $ 8.38$ & $\pm 0.39$               & $ 2.08$ & $\pm 0.16$             &         1957 &       15.6 & $0.015$ & $0.91$ & $  10.2$ & $1.4$ & $142697.6$ & $\cdots$ & $\cdots$ & $\cdots$ & De11 \\
 55 Cnc e      & $ 8.38$ & $\pm 0.39$               & $ 2.08$ & $\pm 0.16$             &         1957 &       15.6 & $0.015$ & $0.91$ & $  10.2$ & $1.4$ & $142697.6$ & $\cdots$ & $\cdots$ & $\cdots$ & De11 \\
 \enddata
-
+% The minipage environment keeps the table footer within the page
+% width when the table occupies the full width.
+% Use \vspace to adjust latex quirks with the vertical spacing.
+%\begin{minipage}{\textwidth}%\vspace{0.4cm}
 \tablenotetext{a}{
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 }
+%\end{minipage}
 \end{deluxetable*}
-\end{table}
+%\end{table}
+
+\subsection{Non-ApJ Templates}
+This template is also compatible with other class files (e.g.,
+article).  This can come in handy when preparing proposals.
+Especially for this case, take a look at the \texttt{top-apj.tex} file
+to enable the compact and or bullet-point Refenreces list.
 
 \section{CONCLUSIONS}
 \label{sec:conclusions}
