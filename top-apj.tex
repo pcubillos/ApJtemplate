@@ -35,6 +35,7 @@
 \usepackage{appendix}
 \usepackage{etoolbox}
 \usepackage[T1]{fontenc}
+\usepackage{paralist}
 
 % This one defines a few more journals (DPS and AAS abstracts) for bibtex:
 \if\papercls \apjcls
@@ -54,6 +55,16 @@
 % actual paper online.
 \bibliographystyle{apj_hyperref}
 %\bibliographystyle{aasjournal}
+
+%% % Enable this for packed reference list:
+%% \setlength\bibsep{0.0pt}
+
+%% % Enable this for bullet-point separated references:
+%% \usepackage{paralist}
+%% \renewenvironment{thebibliography}[1]{\let\par\relax%
+%%   \section*{\refname}\inparaitem}{\endinparaitem}
+%% \let\oldbibitem\bibitem
+%% \renewcommand{\bibitem}{\item[\textbullet]\oldbibitem}
 
 
 % Setup hyperreferences style:
