@@ -17,10 +17,8 @@ The template.tex and template.pdf files should be self explanatory of the featur
 
 ### Be Kind:
 
-Feel free to use, modify, share, and send feedback to us about this template, but, please,
-be kind and aknowledge the effort of the authors. Thanks!
+Feel free to use, modify, and share this template with others.  Send us feedback if you have any comment.
 
 ### License:
 
-Copyright (c) 2016 Patricio Cubillos and Joseph Harrington.  
-This ApJ template is open-source software under the MIT license (see LICENSE).
+This ApJ template is public-domain software under the CC0 license (see LICENSE).
