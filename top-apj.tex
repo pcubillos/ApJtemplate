@@ -6,11 +6,11 @@
 
 % Select ony one pair of \papercls and class file:
 
-% AASTEX6 cls:
+% AASTEX61 cls:
 \newcommand\papercls{\aastexcls}
-\documentclass[tighten, times, preprint2]{aastex6}  % ApJ look-alike
-%\documentclass[tighten, times, trackchanges, preprint2]{aastex6}
-%\documentclass[tighten, times, manuscript]{aastex6}  % Onecolumn, doublespaced
+\documentclass[tighten, times, twocolumn]{aastex61}  % ApJ look-alike
+%\documentclass[tighten, times, trackchanges, twocolumn]{aastex61}
+%\documentclass[tighten, times, manuscript]{aastex61} % Onecolumn, doublespaced
 
 % Emulate ApJ cls:
 %\newcommand\papercls{\apjcls}
@@ -282,23 +282,6 @@ frenchlinks=true]{hyperref}
 \newcommand\widedeltab{deluxetable}
 \else
 \newcommand\widedeltab{deluxetable*}
-\fi
-
-% Chose between the received, revised, and accepted dates or 'In prep' message:
-\if\papercls \othercls
-\else
-  \newcommand\inpress{n}
-  \if\inpress y
-    \received{\today}
-    \revised{}
-    \accepted{}
-    \if\papercls \apjcls
-    \slugcomment{}
-    \fi
-  \else
-  \slugcomment{\tablebox{In preparation for {\em ApJ}. DRAFT of {\today}.}}
-  %\slugcomment{In preparation for {\em ApJ}.  DRAFT of {\today} \now.}
-  \fi
 \fi
 
 

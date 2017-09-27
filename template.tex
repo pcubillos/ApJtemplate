@@ -10,18 +10,41 @@
 
 \title{Latex Template for ApJ Papers}
 
-\author{Patricio~E.~Cubillos\altaffilmark{1,2},
-Joseph~Harrington\altaffilmark{1},
-and
-Third~Author\altaffilmark{1}
-}
 
-\affil{\sp{1} Planetary Sciences Group, Department of
-              Physics, University of Central Florida, Orlando, FL 32816-2385\\
-       \sp{2} Space Research Institute, Austrian Academy of Sciences,
+%% AUTHOR/INSTITUTIONS FOR AASTEX6.1:
+\author{Patricio~E.~Cubillos}
+\affiliation{Space Research Institute, Austrian Academy of Sciences,
               Schmiedlstrasse 6, A-8042, Graz, Austria}
+\affiliation{Planetary Sciences Group, Department of
+             Physics, University of Central Florida, Orlando, FL 32816-2385}
+
+\author{Joseph~Harrington}
+\affiliation{Planetary Sciences Group, Department of
+             Physics, University of Central Florida, Orlando, FL 32816-2385}
+
+\author{Third~Author}
+\affiliation{Planetary Sciences Group, Department of
+             Physics, University of Central Florida, Orlando, FL 32816-2385}
+
+%% AUTHOR/INSTITUTIONS FOR EMULATE APJ:
+% \author{Patricio~E.~Cubillos\altaffilmark{1,2},
+% Joseph~Harrington\altaffilmark{1},
+% and
+% Third~Author\altaffilmark{1}
+% }
+% \affil{\sp{1} Planetary Sciences Group, Department of
+%               Physics, University of Central Florida, Orlando, FL 32816-2385\\
+%        \sp{2} Space Research Institute, Austrian Academy of Sciences,
+%               Schmiedlstrasse 6, A-8042, Graz, Austria}
 
 \email{author@email.org}
+
+% %% Extra info for aastex:
+% \received{Yesterday}
+% \revised{Today}
+% \accepted{Tonight}
+% \published{Tomorrow}
+% \submitjournal{AASJournal}
 
 \begin{abstract}
   This template shows some basic features of a LaTeX template for a
@@ -41,8 +64,8 @@ Third~Author\altaffilmark{1}
 \end{abstract}
 
 % http://journals.aas.org/authors/keywords2013.html
-\keywords{methods: statistical ---
-          planetary systems   ---
+\keywords{methods: statistical --
+          planetary systems   --
           techniques: photometric}
 
 
@@ -331,24 +354,25 @@ including versions of Lorem Ipsum.
 
 \acknowledgments
 
-We thank A.\ Friend, B.\ Foe, and an anonymous referee for helpful
-discussions and improvements to the paper.  C.\ Scientist provided the
-data in table 1.
-We thank contributors to SciPy, Matplotlib, and the Python Programming
-Language; the free and open-source community; the NASA Astrophysics
-Data System; and the JPL Solar System Dynamics group for software and
-services.
-Part of this work is based on observations made with the
-{\em Spitzer Space Telescope}, which is operated by the Jet Propulsion
+We thank A.\ Friend and B.\ Foe for helpful discussions and
+improvements to the paper.  We thank the anonymous referee for his/her
+time and valuable comments.  We thank contributors to Numpy
+\citep{vanderWaltEtal2011numpy}, SciPy \citep{JonesEtal2001scipy},
+Matplotlib \citep{Hunter2007ieeeMatplotlib}, AstroPy
+\citep{Astropy2013aaAstroPy}, and the Python Programming Language; the
+developers of the aastex6.1 latex template \citep{AASteam2016aastex61}
+the free and open-source community; the NASA Astrophysics Data System;
+and the JPL Solar System Dynamics group for software and services.
+Part of this work is based on observations made with the {\em Spitzer
+  Space Telescope}, which is operated by the Jet Propulsion
 Laboratory, California Institute of Technology under a contract with
-NASA.
-Support for this work was provided by NASA through an award
+NASA.  Support for this work was provided by NASA through an award
 issued by JPL/Caltech and through the NASA Science Mission
-Directorate's Astrophysics Data Analysis Program, grant
-XXY00ZZZ1110.
+Directorate's Astrophysics Data Analysis Program, grant XXY00ZZZ1110.
 Jill held a NASA Earth and Space Science Fellowship.  Tom was a
-Fulbright Scholar.  Get the right wording from each entity you must
-acknowledge.  This is very important!!!
+Fulbright Scholar.  The Reproducible Research Compendium (RRC) of this
+article is available at \href{http://tinyurl.com/2fcpre6}
+{https://github.com/pcubillos/CubillosEtal2017\_RRCtemplate}.
 
 \bibliography{template}
 
