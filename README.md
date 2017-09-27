@@ -17,6 +17,7 @@ The template.tex and template.pdf files should be self explanatory of the featur
 
 ### Known issues (help!):
 
+- Author's institution super-indices appear after the comma.
 - There is an awful long space between the author list and the institution list.
 - The institutions list is right aligned rather than center.
 - Long URL hypertexts run out of the column boundaries.
