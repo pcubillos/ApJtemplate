@@ -1014,15 +1014,16 @@ FUNCTION {format.publisher}
 STRINGS {oldname}
 
 FUNCTION {name.or.dash}
-{ 's :=
-   oldname empty$
-     { s 'oldname := s }
-     { s oldname =
-         { "---" }
-         { s 'oldname := s }
-       if$
-     }
-   if$
+{
+%  's :=
+%   oldname empty$
+%     { s 'oldname := s }
+%     { s oldname =
+%         { "---" }
+%         { s 'oldname := s }
+%       if$
+%     }
+%   if$
 }
 
 %%%%%%%%  Functions added from astrobib
