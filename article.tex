@@ -1,0 +1,52 @@
+\input{top-apj}
+
+\begin{document}
+
+\section{Latex Template for Articles}
+
+To switch to a regular article (like this one) all you need to do is
+to edit the \verb+top_apj.tex+ file. First, at the beginning of the
+file, select ``othercls'' as the document class.
+
+
+To remove the section numbers, uncomment this line:
+\verb+\setcounter{secnumdepth}{0}+.
+To remove spaces between biblio entries, uncomment this line:
+\verb+\setlength\bibsep{0.0pt}+.
+To show the biblio entries as a continuous bullet-point text,
+uncomment the block after this line:\\
+\verb+Enable this for bullet-point separated references:+
+
+
+Lorem Ipsum is simply dummy text of the printing and typesetting
+industry. Lorem Ipsum has been the industry's standard dummy text ever
+since the 1500s, when an unknown printer took a galley of type and
+scrambled it to make a type specimen book. It has survived not only
+five centuries, but also the leap into electronic typesetting,
+remaining essentially unchanged. It was popularised in the 1960s with
+the release of Letraset sheets containing Lorem Ipsum passages, and
+more recently with desktop publishing software like Aldus PageMaker
+including versions of Lorem Ipsum.
+Here are some unrelated references:
+\citet{Curtis1917paspIslandUniverseTheory},
+\citet{Shapley1918apjDistanceGlobularClusters}, and 
+\citet{Slipher1913lobAndromedaRarialVelocity}.
+
+
+
+\section{Another Section}
+
+Short articles usually do not have an acknowledgement section like
+this one.  This is just a filler. We thank contributors to Numpy
+\citep{vanderWaltEtal2011numpy}, SciPy \citep{JonesEtal2001scipy},
+Matplotlib \citep{Hunter2007ieeeMatplotlib}, AstroPy
+\citep{Astropy2013aaAstroPy}, and the Python Programming Language; the
+free and open-source community; Support for this work was provided by
+NASA through an award issued by JPL/Caltech and through the NASA
+Science Mission Directorate's Astrophysics Data Analysis Program,
+grant XXY00ZZZ1110.  Jill held a NASA Earth and Space Science
+Fellowship.  Tom was a Fulbright Scholar.
+
+\bibliography{template}
+
+\end{document}
