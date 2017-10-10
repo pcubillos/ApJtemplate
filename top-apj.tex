@@ -28,6 +28,9 @@
 \usepackage{apjfonts}
 \else\if\papercls \othercls
 \usepackage{epsfig}
+\usepackage{margin}
+% times font (for \othercls):
+\usepackage{times}
 \fi\fi
 \usepackage{ifthen}
 \usepackage{natbib}
@@ -56,8 +59,11 @@
 \bibliographystyle{apj_hyperref}
 %\bibliographystyle{aasjournal}
 
-%% % Enable this for packed reference list:
-%% \setlength\bibsep{0.0pt}
+% Enable this for packed reference list:
+%\setlength\bibsep{0.0pt}
+
+% Enablw this to remove section numbers:
+%\setcounter{secnumdepth}{0}
 
 %% % Enable this for bullet-point separated references:
 %% \usepackage{paralist}
