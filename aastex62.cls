@@ -1199,7 +1199,8 @@ the#1\endcsname}
 %\clearpage
 % \vrule used for extra space; otherwise revtex4-1 sometimes eats
 % away the last line before appendix
-        \noindent\mbox{}\vrule height 24pt width0pt\hfill{\apjsecfont APPENDIX}\hfill\mbox{}\par
+% HACK: Capitalized 'Appendix' rather than all caps:
+        \noindent\mbox{}\vrule height 24pt width0pt\hfill{\apjsecfont Appendix}\hfill\mbox{}\par
         \nopagebreak\medskip\@nobreaktrue\def\ApjSectionpenalty{\@M}
         \@firstsectionfalse
           \setcounter{section}{0}
