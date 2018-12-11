@@ -9,6 +9,12 @@
 %
 % eprint number will be written after paper info, and arxiv, ADS and ISBN will be hyperlinked
 %
+%% 2018 Nov 30
+%% Fix by Patricio Cubillos <pcubillos@fulbrightmail.org>
+%% Added escape.comment.numbersign function to escape % and # characters
+%% in the adsurl field (based on the spr-mp-sola.bst file from
+%% http://www.e-publications.org/springer/support/sola.html).
+
 %% 2003 Jun 25
 %% Fix by Craig Wiegert <cwiegert@alumni.uchicago.edu>
 %% Added 8 author upper limit to reference list, based on aas.bst.
@@ -41,7 +47,7 @@
 %% merlin.mbs  (with options: `,ay,nat,nm-rev,nmdash,dt-beg,yr-per,note-yr,atit-u,jtit-x,jttl-rm,thtit-a,vnum-x,volp-com,jpg-1,pp-last,btit-rm,add-pub,pub-par,pre-edn,edby,edbyx,blk-com,fin-bare,ppx,ed,abr,ord,jabr,amper,em-x')
 %% ----------------------------------------
 %% *** Bibliographic Style for ApJ ***
-%% 
+%%
  %-------------------------------------------------------------------
  % The original source file contains the following version information:
  % \ProvidesFile{merlin.mbs}[1998/02/25 3.85a (PWD)]
@@ -115,7 +121,7 @@ ENTRY
   {}
   { label extra.label sort.label short.list }
 
-INTEGERS { output.state before.all mid.sentence after.sentence after.block }
+INTEGERS { output.state before.all mid.sentence after.sentence after.block slen}
 
 FUNCTION {init.state.consts}
 { #0 'before.all :=
@@ -125,6 +131,24 @@ FUNCTION {init.state.consts}
 }
 
 STRINGS { s t }
+
+FUNCTION {not}
+{   { #0 }
+    { #1 }
+  if$
+}
+
+FUNCTION {and}
+{   'skip$
+    { pop$ #0 }
+  if$
+}
+
+FUNCTION {or}
+{   { pop$ #1 }
+    'skip$
+  if$
+}
 
 FUNCTION {output.nonnull}
 { 's :=
@@ -147,27 +171,47 @@ FUNCTION {output.nonnull}
   s
 }
 
+FUNCTION {escape.comment.numbersign}
+{ 't :=
+  "" 's :=
+  ""
+    { t empty$ not }
+    { t #1 #1 substring$ "%" =
+      t #1 #1 substring$ "#" =
+      or
+      "\" s = not
+      and
+        {"\" *}
+        'skip$
+      if$
+      t #1 #1 substring$ 's :=
+      s *
+      t #2 global.max$ substring$ 't :=
+    }
+  while$
+}
+
 FUNCTION {format.eprint}
 { eprint empty$
 { "" }
-{ ", \eprint{" * eprint * "}" * }    
-if$
-}
-FUNCTION {format.adsurl}
-{ adsurl empty$
-{ "" }
-%{  ", \href{" * adsurl * "}{ADS}" * }    
-{  ", \adsurl{" * adsurl * "}" * }
-if$
-}
-FUNCTION {format.ISBN}
-{ ISBN empty$
-{ "" }
-%{ ", \href{http://cosmologist.info/ISBN/" * ISBN * "}{ISBN: " * ISBN * "}" * }    
-{ ", \ISBN{" * ISBN * "}" * }
+{ ", \eprint{" * eprint * "}" * }
 if$
 }
 
+FUNCTION {format.adsurl}
+{ adsurl empty$
+    { "" }
+    {  ", \adsurl{" * adsurl escape.comment.numbersign * "}" * }
+  if$
+}
+
+FUNCTION {format.ISBN}
+{ ISBN empty$
+{ "" }
+%{ ", \href{http://cosmologist.info/ISBN/" * ISBN * "}{ISBN: " * ISBN * "}" * }
+{ ", \ISBN{" * ISBN * "}" * }
+if$
+}
 
 FUNCTION {output}
 { duplicate$ empty$
@@ -217,24 +261,6 @@ FUNCTION {add.blank}
 FUNCTION {date.block}
 {
   skip$
-}
-
-FUNCTION {not}
-{   { #0 }
-    { #1 }
-  if$
-}
-
-FUNCTION {and}
-{   'skip$
-    { pop$ #0 }
-  if$
-}
-
-FUNCTION {or}
-{   { pop$ #1 }
-    'skip$
-  if$
 }
 
 FUNCTION {new.block.checkb}
@@ -1072,7 +1098,7 @@ FUNCTION {format.full.book.spec} % The title should be on the stack.
 	    { " No." number tie.or.space.connect * }
 	    if$
 	}
-	{ series ", Vol." volume tie.or.space.connect *  
+	{ series ", Vol." volume tie.or.space.connect *
           ", " * swap$ format.ed.booktitle *
 	  number empty$
 	    'skip$
@@ -1683,6 +1709,9 @@ FUNCTION {begin.bib}
   write$ newline$
   "\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi"
   write$ newline$
+  "\ifx\adsurl \undefined \def\adsurl#1{\href{#1}{ADS}}\fi" write$ newline$
+  "\ifx\eprint \undefined \def\eprint#1{\href{http://arxiv.org/abs/#1}{#1}}\fi" write$ newline$
+
 }
 
 EXECUTE {begin.bib}
@@ -1699,4 +1728,4 @@ FUNCTION {end.bib}
 EXECUTE {end.bib}
 %% End of customized bst file
 %%
-%% End of file `apj.bst'.
+%% End of file `apj_hyperref.bst'.
