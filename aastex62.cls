@@ -1044,7 +1044,7 @@ footnote\the\fncount\endcsname{\if@two@col\hsize=242pt\fi\relax#1}}
 \else
 % HACK Adjust the space above the footnote:
 \footnotesep 0pt
-\skip\footins 4.0mm plus 1mm minus 1mm
+\skip\footins 5.0mm plus 1mm minus 1mm
 \fi
 
 % HACK: Shift the footnote's rule relative to the footnote text
